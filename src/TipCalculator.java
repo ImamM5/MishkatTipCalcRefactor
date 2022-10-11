@@ -3,73 +3,72 @@ public class TipCalculator
     private double tBill;
     private double tTip;
     private int people;
-    private double tipAmount;
-    private double tTipBill;
-    private double tipPerPerson;
-    private double tPerPerson;
 
 
-    public TipCalculator(double tBill, double tTip, int people)
+    public TipCalculator(double tTip, int people)
     {
         this.tTip = tTip;
-        this.tBill = tBill;
+        tBill = 0.0;
         this.people = people;
 
 
     }
 
     // sets the values
-    public void setTipAmount()
+
+    public void addMeal(double cost)
     {
-        this.tipAmount = tBill*(tTip/100);
+        this.tBill += cost;
     }
 
-    public void setTotalBillTip()
-    {
-        this.tTipBill = tBill + tipAmount;
-    }
 
-    public void setTipPerPerson()
-    {
-        this.tipPerPerson = (tBill/people) * (tTip/100);
-    }
 
-    public void setTotalPerPerson()
-    {
-        this.tPerPerson = (tBill/people) + tipPerPerson;
-    }
+
 
     //gets the values
-    public double getTipAmount() {
+    public double getTotalBillBeforeTip()
+    {
+        return tBill;
+    }
+
+    public double getTipPercentage()
+    {
+        return tTip;
+    }
+
+    public double getTipAmount()
+    {
+        double tipAmount;
+        tipAmount = tBill * (getTipPercentage()/100);
         return tipAmount;
     }
 
-    public double getTTipBill() {
-        return tTipBill;
-    }
-
-    public double getTipPerPerson() {
-        return tipPerPerson;
-    }
-
-    public double getTPerPerson() {
-        return tPerPerson;
-    }
-
-    public void calcPrinter()
+    public double getTotalBill()
     {
-        System.out.print("Total tip amount: ");
-        System.out.printf("%.2f", getTipAmount());
-        System.out.println();
-        System.out.print("Total bill including tip: ");
-        System.out.printf("%.2f", getTTipBill());
-        System.out.println();
-        System.out.print("Tip per person: ");
-        System.out.printf("%.2f", getTipPerPerson());
-        System.out.println();
-        System.out.print("Total per person: ");
-        System.out.printf("%.2f", getTPerPerson());
-        System.out.println();
-        System.out.println("-------------------------------");
+        double totalBill;
+        totalBill = tBill + getTipAmount();
+        return totalBill;
     }
+
+    public double getPersonCostBeforeTip()
+    {
+        double perPersonCost;
+        perPersonCost = tBill/people;
+        return perPersonCost;
+    }
+
+    public double getPerPersonTipAmount()
+    {
+        double perPersonTip;
+        perPersonTip = getTipAmount()/people;
+        return perPersonTip;
+    }
+
+    public double getPerPersonTotalCost()
+    {
+        double perPersonTotal;
+        perPersonTotal = getPersonCostBeforeTip() + getPerPersonTipAmount();
+        return perPersonTotal;
+    }
+
 }

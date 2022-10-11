@@ -17,13 +17,22 @@ public class TipCalcRunner
         int people = input.nextInt(); //user inputs the total number of people in the party
         System.out.println();
 
-        TipCalculator tipCalc = new TipCalculator(tBill, tTip, people);
-        tipCalc.setTipAmount();
-        tipCalc.setTotalBillTip();
-        tipCalc.setTipPerPerson();
-        tipCalc.setTotalPerPerson();
+        TipCalculator tipCalc = new TipCalculator(tTip, people);
+        tipCalc.addMeal(tBill);
 
-        tipCalc.calcPrinter();
+        System.out.print("Total tip amount: ");
+        System.out.printf("%.2f", tipCalc.getTipAmount());
+        System.out.println();
+        System.out.print("Total bill including tip: ");
+        System.out.printf("%.2f", tipCalc.getTotalBill());
+        System.out.println();
+        System.out.print("Tip per person: ");
+        System.out.printf("%.2f", tipCalc.getPerPersonTipAmount());
+        System.out.println();
+        System.out.print("Total per person: ");
+        System.out.printf("%.2f", tipCalc.getPerPersonTotalCost());
+        System.out.println();
+        System.out.println("-------------------------------");
 
     }
 }
